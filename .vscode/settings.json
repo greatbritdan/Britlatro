@@ -1,0 +1,22 @@
+{
+    "Lua.diagnostics.globals": [
+        "SMODS",
+        "add_tag",
+        "play_sound",
+        "hand_chips",
+        "mult",
+        "G",
+        "Tag",
+        "Event",
+        "HEX",
+        "delay",
+        "create_card",
+        "used_tarot",
+        "ease_hands_played",
+        "ease_discard",
+        "love",
+        "localize",
+        "card_eval_status_text",
+        "juice_card_until"
+    ]
+}

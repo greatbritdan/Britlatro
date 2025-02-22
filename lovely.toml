@@ -1,0 +1,102 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "SC = Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, SC_scale*G.CARD_W, SC_scale*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_joker'])"
+position = "at"
+payload = "SC = Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, SC_scale*G.CARD_W, SC_scale*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_brit_britdan'])"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "for i = 1, 2 do"
+position = "at"
+payload = "for i = 1, G.GAME.modifiers.booster_packs or 2 do"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''local card = Card(0,0, 0.5*G.CARD_W, 0.5*G.CARD_H, G.P_CARDS[v[1]], G.P_CENTERS.c_base)'''
+position = "at"
+payload = '''local card = Card(0,0, 0.5*G.CARD_W, 0.5*G.CARD_H, G.P_CARDS[v[1]], G.P_CENTERS[v[3] or 'c_base'])'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "elseif v.id == 'no_shop_jokers' then"
+position = "before"
+payload = '''
+elseif v.id == 'no_shop_purchases' then
+    change_shop_size(-2)
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "reset_idol_card()"
+position = "before"
+payload = '''
+reset_slotmachine_card()
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "reset_idol_card()"
+position = "before"
+payload = '''
+reset_slotmachine_card()
+G.GAME.current_round.brit_used_tags = {}
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "discover_card(G.P_TAGS[_tag.key])"
+position = "after"
+payload = '''
+if BRIT_VALID_TAGS[_tag.key] == 1 then
+    if not G.GAME.current_round.brit_used_tags[_tag.key] then
+        G.GAME.current_round.brit_used_tags[_tag.key] = 0
+    end
+    G.GAME.current_round.brit_used_tags[_tag.key] = G.GAME.current_round.brit_used_tags[_tag.key] + 1
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "if type == 'Small' then"
+position = "at"
+payload = "if type == 'Small' and (not G.GAME.modifiers.no_blind_skips) then"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "elseif type == 'Big' then"
+position = "at"
+payload = "elseif type == 'Big' and (not G.GAME.modifiers.no_blind_skips) then"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "elseif not run_info then"
+position = "before"
+payload = '''
+elseif (type == 'Small' or type == 'Big') and G.GAME.modifiers.no_blind_skips then
+    extras = {n=G.UIT.R, config={align = "cm"}, nodes={}}
+'''
+match_indent = true
