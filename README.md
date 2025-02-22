@@ -1,6 +1,8 @@
 # Britlatro: A Balatro mod
 A very British inspired mod that aims to keep Balatros core balaance.
 
+https://www.youtube.com/watch?v=qoeCoddVAoo&ab_channel=Britdan
+
 ## Featuring...
 - 20 New Jokers
 - New Consumable Type - TagCard
