@@ -3,9 +3,9 @@
 	"name": "Britlatro",
 	"display_name": "Britlatro",
 	"author": ["Britdan"],
-	"description": "Britdan has invaded, send nukes.",
+	"description": "A very British Balatro mod.",
 	"prefix": "brit",
 	"main_file": "main.lua",
-	"version": "0.4.0",
+	"version": "1.0.0",
 	"badge_colour": "415E9C"
 }
