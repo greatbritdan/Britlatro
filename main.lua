@@ -174,7 +174,6 @@ function BRT_Joker_Calculate(s,card,context)
         end
     elseif context.skip_blind then
         if name == 'j_brit_hopscotch' and (not context.blueprint) then
-            card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chips_mod
             G.E_MANAGER:add_event(Event({func = function()
                 card_eval_status_text(card, 'extra', nil, nil, nil, {
                     message = localize{type = 'variable', key = 'a_chips', vars = {card.ability.extra.chips_mod}},
@@ -495,12 +494,17 @@ SMODS.Joker(BRT_New_Joker{key='lastteabag', rarity=2, pos={x=3,y=2}, config={ext
 
 SMODS.Joker(BRT_New_Joker{key='sixpence', rarity=1, pos={x=2,y=3}, config={}})
 
-SMODS.Joker(BRT_New_Joker{key='hopscotch', rarity=2, pos={x=3,y=3}, config={extra={chips=0, chips_mod=25}},
+SMODS.Joker(BRT_New_Joker{key='hopscotch', rarity=2, pos={x=3,y=3}, config={extra={chips=0, chips_mod=50}},
     joker_display_def = function (JokerDisplay)
         return {
             text = {{ text = "+" }, { ref_table = "card.ability.extra", ref_value = "chips" }},
             text_config = { colour = G.C.CHIPS }
         }
+    end,
+    update = function (s, card, dt)
+        if G.STAGE == G.STAGES.RUN then
+            card.ability.extra.chips = G.GAME.skips*card.ability.extra.chips_mod
+        end
     end
 })
 
