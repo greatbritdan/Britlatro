@@ -192,8 +192,8 @@ return {
                     "next round"
                 }
             },
-            tag_brit_sleave = {
-                name = "Sleave Tag",
+            tag_brit_sleeve = {
+                name = "Sleeve Tag",
                 text = {
                     "Gives a free",
                     "{C:tagcard}Mega Tag Pack",
