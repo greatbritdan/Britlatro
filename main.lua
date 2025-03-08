@@ -352,7 +352,7 @@ SMODS.Joker(BRT_New_Joker{key='jimbobooster', rarity=1, pos={x=2,y=0}, config={e
     end,
 })
 
-SMODS.Joker(BRT_New_Joker{key='bruhman', rarity=1, pos={x=0,y=1}, config={extra={basemult=20, mult=20, mult_mod=4}},
+SMODS.Joker(BRT_New_Joker{key='bruhman', rarity=1, pos={x=0,y=1}, config={extra={basemult=20, mult=20, mult_mod=5}},
     update = function (s, card, dt)
         local mult = card.ability.extra.basemult
         if G.jokers and G.jokers.cards then
@@ -472,7 +472,7 @@ SMODS.Joker(BRT_New_Joker{key='red_joker', rarity=1, pos={x=1,y=2}, config={extr
     end
 })
 
-SMODS.Joker(BRT_New_Joker{key='rekoj', rarity=2, pos={x=2,y=2}, config={extra={mult=4,odds=12}},
+SMODS.Joker(BRT_New_Joker{key='rekoj', rarity=3, pos={x=2,y=2}, config={extra={mult=3,odds=12}},
     joker_display_def = function (JokerDisplay)
         return {
             text = {{ border_nodes = {{ text = "X" }, { ref_table = "card.ability.extra", ref_value = "mult" }}}},
