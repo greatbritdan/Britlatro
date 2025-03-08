@@ -36,6 +36,14 @@ payload = '''
 elseif v.id == 'no_shop_purchases' then
     change_shop_size(-2)
     self.GAME.modifiers[v.id] = true
+elseif v.id == 'boosters_in_shop' then
+    G.GAME.joker_rate = 4
+    G.GAME.tarot_rate = 4
+    G.GAME.planet_rate = 4
+    G.GAME.playing_card_rate = 4
+    G.GAME.spectral_rate = 4
+    G.GAME.booster_rate = 4
+    self.GAME.modifiers[v.id] = true
 '''
 match_indent = true
 
@@ -112,6 +120,46 @@ if G.GAME.modifiers.no_blind_skips then
 	e.config.colour = G.C.UI.BACKGROUND_INACTIVE
     e.config.button = nil
     return
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "G.GAME.spectral_rate = G.GAME.spectral_rate or 0"
+position = "after"
+payload = "G.GAME.booster_rate = G.GAME.booster_rate or 0"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "local total_rate = G.GAME.joker_rate + G.GAME.playing_card_rate"
+position = "after"
+payload = "local total_rate = G.GAME.joker_rate + G.GAME.playing_card_rate + G.GAME.booster_rate"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "for _, v in ipairs(rates) do"
+position = "before"
+payload = '''
+print(total_rate)
+table.insert(rates, {type = 'Booster', val = G.GAME.booster_rate})
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "if card.ability.consumeable and not skip_materialize then card:start_materialize() end"
+position = "after"
+payload = '''
+if _type == 'Booster' then
+    card.T.w = card.T.w*1.27
+    card.T.h = card.T.h*1.27
 end
 '''
 match_indent = true

@@ -1181,6 +1181,29 @@ SMODS.Challenge{
     }
 }
 
+SMODS.Challenge{
+    key = 'equality',
+    rules = {
+        custom = {
+            {id = 'boosters_in_shop'},
+        },
+        modifiers = {
+            {id = 'reroll_cost', value = 1},
+        }
+    },
+    vouchers = {
+        {id = 'v_magic_trick'},{id = 'v_illusion'},
+    },
+    restrictions = {
+        banned_cards = {
+            {id = 'v_planet_merchant'},{id = 'v_planet_tycoon'},
+            {id = 'v_tarot_merchant'},{id = 'v_tarot_tycoon'},
+            {id = 'v_brit_tag_merchent'},{id = 'v_brit_tag_tycoon'},
+        },
+        banned_tags = {}
+    }
+}
+
 local lc = SMODS.Atlas{key = 'britdanpack_lc', path = 'britdanpack_lc.png', px = 71, py = 95}
 local hc = SMODS.Atlas{key = 'britdanpack_hc', path = 'britdanpack_hc.png', px = 71, py = 95}
 

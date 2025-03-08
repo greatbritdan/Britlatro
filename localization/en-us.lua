@@ -479,6 +479,7 @@ return {
         challenge_names = {
             c_brit_nationallottery = "National Lottery",
             c_brit_tagfull = "Tag-Full",
+            c_brit_equality = "Equalize",
         },
         v_text = {
             ch_c_no_shop_purchases={
@@ -486,6 +487,9 @@ return {
             },
             ch_c_no_blind_skips={
                 "You are not able to {C:attention}skip{} any Blinds",
+            },
+            ch_c_boosters_in_shop={
+                "All shop rates are the same, {C:attention}Booster Packs{} can appear in the {C:attention}shop",
             },
         },
         labels = {
