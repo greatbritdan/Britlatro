@@ -496,7 +496,11 @@ SMODS.Joker(BRT_New_Joker{key='lastteabag', rarity=2, pos={x=3,y=2}, config={ext
     end
 })
 
-SMODS.Joker(BRT_New_Joker{key='sixpence', rarity=1, pos={x=2,y=3}, config={}})
+SMODS.Joker(BRT_New_Joker{key='sixpence', rarity=1, pos={x=2,y=3}, config={},
+    joker_display_def = function (JokerDisplay)
+        return { reminder_text = {{ text = "(Aces, 6s)" }} }
+    end,
+})
 
 SMODS.Joker(BRT_New_Joker{key='hopscotch', rarity=2, pos={x=3,y=3}, config={extra={chips=0, chips_mod=50}},
     joker_display_def = function (JokerDisplay)
