@@ -166,6 +166,14 @@ return {
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)"
                 },
             },
+            j_brit_vouchablejoker = {
+                name = "Vouchable Joker",
+                text = {
+                    "Gains {X:mult,C:white}X#1#{} Mult for each",
+                    "{C:attention}Voucher{} redeemed this run",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{}{C:inactive})",
+                },
+            }
         },
         Enhanced = {
             m_brit_copper = {

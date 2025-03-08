@@ -190,3 +190,38 @@ elseif self.config.center.name == "j_brit_jimbobooster" then
     self.T.w = W*scale*1.27*scale
 '''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "function Card:redeem()"
+position = "after"
+payload = '''
+G.GAME.current_round.vouchers_used = (G.GAME.current_round.vouchers_used or 0) + 1
+print("Voucher'd",G.GAME.current_round.vouchers_used)
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "G.GAME.used_vouchers[v.id] = true"
+position = "after"
+payload = "G.GAME.current_round.vouchers_used = (G.GAME.current_round.vouchers_used or 0) + 1"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = "G.GAME.used_vouchers[self.effect.config.voucher] = true"
+position = "after"
+payload = "G.GAME.current_round.vouchers_used = (G.GAME.current_round.vouchers_used or 0) + 1"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = "G.GAME.used_vouchers[v ] = true"
+position = "after"
+payload = "G.GAME.current_round.vouchers_used = (G.GAME.current_round.vouchers_used or 0) + 1"
+match_indent = true

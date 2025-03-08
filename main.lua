@@ -76,6 +76,7 @@ function BRT_Joker_Vars(s,info_queue,card)
     elseif name == 'j_brit_vat' then return {vars={card.ability.extra.dollar_mod}}
     elseif name == 'j_brit_tagteam' then return {vars={localize('Two Pair','poker_hands')}}
     elseif name == 'j_brit_fridgemagnet' then return {vars={card.ability.extra.mult_mod,card.ability.extra.mult}}
+    elseif name == 'j_brit_vouchablejoker' then return {vars={card.ability.extra.Xmult_mod,card.ability.extra.Xmult}}
     else return {vars={}}
     end
 end
@@ -145,6 +146,9 @@ function BRT_Joker_Calculate(s,card,context)
             if card.ability.extra.mult > 0 then
                 return { mult_mod=card.ability.extra.mult, message=localize{type='variable', key='a_mult', vars={card.ability.extra.mult}} }
             end
+        end
+        if name == 'j_brit_vouchablejoker' then
+            return { Xmult_mod=card.ability.extra.Xmult, message=localize{type='variable', key='a_xmult', vars={card.ability.extra.Xmult}} }
         end
     elseif context.final_scoring_step then
         if name == 'j_brit_rekoj' and (not context.blueprint) then
@@ -369,7 +373,7 @@ SMODS.Joker(BRT_New_Joker{key='bruhman', rarity=1, pos={x=0,y=1}, config={extra=
     end
 })
 
-SMODS.Joker(BRT_New_Joker{key='unionjack', rarity=3, pos={x=1,y=1}, config={extra={Xmult=1,Xmult_mod=0.25}},
+SMODS.Joker(BRT_New_Joker{key='unionjack', rarity=2, pos={x=1,y=1}, config={extra={Xmult=1,Xmult_mod=0.2}},
     update = function (s, card, dt)
         card.ability.jack_tally = 0
         if G.STAGE == G.STAGES.RUN then
@@ -522,7 +526,7 @@ SMODS.Joker(BRT_New_Joker{key='lastcrumpet', rarity=2, pos={x=0,y=4}, config={sh
     end
 })
 
-SMODS.Joker(BRT_New_Joker{key='dentures', rarity=2, pos={x=1,y=4}, config={extra={mult=0, mult_mod=3}},
+--[[SMODS.Joker(BRT_New_Joker{key='dentures', rarity=2, pos={x=1,y=4}, config={extra={mult=0, mult_mod=3}},
     update = function (s, card, dt)
         card.ability.extra.mult = 0
         if G.STAGE == G.STAGES.RUN then
@@ -537,6 +541,24 @@ SMODS.Joker(BRT_New_Joker{key='dentures', rarity=2, pos={x=1,y=4}, config={extra
         return {
             text = {{ text = "+" }, { ref_table = "card.ability.extra", ref_value = "mult" }},
             text_config = { colour = G.C.MULT }
+        }
+    end
+})]]
+
+SMODS.Joker(BRT_New_Joker{key='vouchablejoker', rarity=3, pos={x=1,y=4}, config={extra={Xmult=1,Xmult_mod=0.25}},
+    update = function (s, card, dt)
+        local count = G.GAME.current_round.vouchers_used or 0
+        card.ability.extra.Xmult = 1 + (card.ability.extra.Xmult_mod * count)
+    end,
+    joker_display_def = function (JokerDisplay)
+        return {
+            text = {{ border_nodes = {{ text = "X" }, { ref_table = "card.joker_display_values", ref_value = "xmult" }}}},
+            calc_function = function(card)
+                local count = G.GAME.current_round.vouchers_used or 0
+                local xmult = 1 + (card.ability.extra.Xmult_mod * count)
+                if xmult < 1 then xmult = 1 end
+                card.joker_display_values.xmult = xmult
+            end
         }
     end
 })
