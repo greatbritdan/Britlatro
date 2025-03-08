@@ -1153,15 +1153,6 @@ SMODS.Challenge{
         }
     }
 }
-local can_reroll = G.FUNCS.can_reroll
-function G.FUNCS.can_reroll(e)
-	if G.GAME.modifiers.no_shop_purchases then
-		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
-        e.config.button = nil
-	else
-		return can_reroll(e)
-	end
-end
 
 SMODS.Challenge{
     key = 'tagfull',
@@ -1217,6 +1208,16 @@ SMODS.DeckSkin{
 }
 
 --
+
+local crr = G.FUNCS.can_reroll
+function G.FUNCS.can_reroll(e)
+	if G.GAME.modifiers.no_shop_purchases then
+		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+        return
+    end
+	return crr(e)
+end
 
 function G.FUNCS.exit_button()
     G.SETTINGS.paused = true; love.event.quit()

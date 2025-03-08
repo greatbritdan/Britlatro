@@ -35,6 +35,7 @@ position = "before"
 payload = '''
 elseif v.id == 'no_shop_purchases' then
     change_shop_size(-2)
+    self.GAME.modifiers[v.id] = true
 '''
 match_indent = true
 
@@ -98,5 +99,19 @@ position = "before"
 payload = '''
 elseif (type == 'Small' or type == 'Big') and G.GAME.modifiers.no_blind_skips then
     extras = {n=G.UIT.R, config={align = "cm"}, nodes={}}
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = '''G.FUNCS.can_reroll = function(e)'''
+position = "after"
+payload = '''
+if G.GAME.modifiers.no_blind_skips then
+	e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+    e.config.button = nil
+    return
+end
 '''
 match_indent = true
