@@ -1129,12 +1129,13 @@ SMODS.Challenge{
     },
     restrictions = {
         banned_cards = {
+            {id = 'j_chaos'},{id = 'j_flash'},
             {id = 'v_overstock_norm'},{id = 'v_overstock_plus'},
             {id = 'v_magic_trick'},{id = 'v_illusion'},
             {id = 'v_planet_merchant'},{id = 'v_planet_tycoon'},
             {id = 'v_tarot_merchant'},{id = 'v_tarot_tycoon'},
             {id = 'v_brit_tag_merchent'},{id = 'v_brit_tag_tycoon'},
-            {id = 'v_reroll_glut'},{id = 'v_reroll_surplus'},
+            {id = 'v_reroll_surplus'},{id = 'v_reroll_glut'},
             {id = 'c_brit_clearer'},
             {id = 'c_brit_foiler'},
             {id = 'c_brit_holoer'},
@@ -1152,6 +1153,15 @@ SMODS.Challenge{
         }
     }
 }
+local can_reroll = G.FUNCS.can_reroll
+function G.FUNCS.can_reroll(e)
+	if G.GAME.modifiers.no_shop_purchases then
+		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+	else
+		return can_reroll(e)
+	end
+end
 
 SMODS.Challenge{
     key = 'tagfull',
