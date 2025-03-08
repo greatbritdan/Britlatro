@@ -40,6 +40,7 @@ elseif v.id == 'boosters_in_shop' then
     G.GAME.joker_rate = 4
     G.GAME.tarot_rate = 4
     G.GAME.planet_rate = 4
+    G.GAME.tagcard_rate = 4
     G.GAME.playing_card_rate = 4
     G.GAME.spectral_rate = 4
     G.GAME.booster_rate = 4
@@ -146,7 +147,6 @@ target = "functions/UI_definitions.lua"
 pattern = "for _, v in ipairs(rates) do"
 position = "before"
 payload = '''
-print(total_rate)
 table.insert(rates, {type = 'Booster', val = G.GAME.booster_rate})
 '''
 match_indent = true
@@ -167,12 +167,12 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = "if center.name == 'Wee Joker' and (center.discovered or self.bypass_discovery_center) then "
+pattern = 'if center.name == "Wee Joker" and (center.discovered or self.bypass_discovery_center) then'
 position = "before"
 payload = '''
-if center.name == 'j_brit_jimbobooster' and (center.discovered or self.bypass_discovery_center) then 
+if center.name == "j_brit_jimbobooster" and (center.discovered or self.bypass_discovery_center) then 
     W = W*1.27
-    h = h*1.27
+    H = H*1.27
     self.T.w = W
     self.T.h = H
 end
@@ -182,11 +182,10 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = "elseif self.config.center.name == 'Wee Joker' then "
+pattern = 'elseif self.config.center.name == "Wee Joker" then'
 position = "before"
 payload = '''
-print(self.config.center.name)
-elseif self.config.center.name == 'j_brit_jimbobooster' then 
+elseif self.config.center.name == "j_brit_jimbobooster" then 
     self.T.h = H*scale*1.27*scale
     self.T.w = W*scale*1.27*scale
 '''
