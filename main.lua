@@ -1187,9 +1187,7 @@ SMODS.Challenge{
         custom = {
             {id = 'boosters_in_shop'},
         },
-        modifiers = {
-            {id = 'reroll_cost', value = 1},
-        }
+        modifiers = {}
     },
     vouchers = {
         {id = 'v_magic_trick'},{id = 'v_illusion'},
