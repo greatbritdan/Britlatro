@@ -1120,7 +1120,7 @@ SMODS.Back{
     atlas = "Enhancers",
     pos = {x = 2, y = 0},
     config = {ante_scaling = 2, joker_slot = -1},
-    loc_vars = function(s,iq) return {vars={s.config.joker_slot}} end,
+    loc_vars = function(s,iq) return {vars={s.config.joker_slot,s.config.ante_scaling}} end,
     apply = function()
         G.E_MANAGER:add_event(Event({
             func = function()

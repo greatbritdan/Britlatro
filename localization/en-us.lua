@@ -7,6 +7,7 @@ return {
                     "Start with a Deck",
                     "full of {C:attention}Shiny Enhanced{} cards",
                     "{C:red}#1#{} Joker slots",
+                    "{C:red}X#2#{} base Blind size",
                 }
             }
         },
