@@ -472,7 +472,7 @@ SMODS.Joker(BRT_New_Joker{key='red_joker', rarity=1, pos={x=1,y=2}, config={extr
     end
 })
 
-SMODS.Joker(BRT_New_Joker{key='rekoj', rarity=2, pos={x=2,y=2}, config={extra={mult=3,odds=12}},
+SMODS.Joker(BRT_New_Joker{key='rekoj', rarity=2, pos={x=2,y=2}, config={extra={mult=4,odds=12}},
     joker_display_def = function (JokerDisplay)
         return {
             text = {{ border_nodes = {{ text = "X" }, { ref_table = "card.ability.extra", ref_value = "mult" }}}},
