@@ -352,18 +352,17 @@ SMODS.Joker(BRT_New_Joker{key='jimbobooster', rarity=1, pos={x=2,y=0}, config={e
     end,
 })
 
-SMODS.Joker(BRT_New_Joker{key='bruhman', rarity=1, pos={x=0,y=1}, config={extra={basemult=20, mult=20, mult_mod=5}},
+SMODS.Joker(BRT_New_Joker{key='bruhman', rarity=1, pos={x=0,y=1}, config={extra={mult=30, basemult=30}},
     update = function (s, card, dt)
-        local mult = card.ability.extra.basemult
+        card.ability.extra.mult = card.ability.extra.basemult
         if G.jokers and G.jokers.cards then
             for i = 1, #G.jokers.cards do
                 if G.jokers.cards[i].edition and G.jokers.cards[i].edition.negative then
-                    mult = mult - card.ability.extra.mult_mod
-                    if mult <= 0 then return end
+                    card.ability.extra.mult = 0
+                    return
                 end
             end
         end
-        card.ability.extra.mult = mult
     end,
     joker_display_def = function (JokerDisplay)
         return {

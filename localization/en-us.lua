@@ -45,8 +45,8 @@ return {
             j_brit_bruhman = {
                 name = "Bruh...",
                 text = {
-                    '{C:mult}+#1#{} Mult, reduces by',
-                    '{C:mult}+#2#{} for each negative joker'
+                    '{C:mult}+#1#{} Mult if you have',
+                    'no negative jokers'
                 },
             },
             j_brit_unionjack = {
