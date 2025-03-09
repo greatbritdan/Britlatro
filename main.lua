@@ -216,6 +216,18 @@ function BRT_Joker_Calculate(s,card,context)
                 colour = G.C.MONEY
             }
         end
+        if name == 'j_brit_vouchablejoker' and context.card.ability.set == 'Voucher' then
+            local count = G.GAME.current_round.vouchers_used or 0
+            local newxmult = 1 + (card.ability.extra.Xmult_mod * count)
+            G.E_MANAGER:add_event(Event({func = function()
+                card_eval_status_text(card, 'extra', nil, nil, nil, {
+                    message = localize{type = 'variable', key = 'a_xmult', vars = {newxmult}},
+                    colour = G.C.MULT,
+                    card = card
+                })
+                return true
+            end}))
+        end
     end
     if context.individual and context.cardarea == G.hand and (not context.end_of_round) then
         if name == "j_brit_britdan" and context.other_card.ability.name == "m_brit_copper" then
@@ -1138,6 +1150,28 @@ SMODS.Back{
         }))
     end
 }
+
+SMODS.Back{
+    name = "Concrete Deck",
+    key = "concrete",
+    atlas = "Enhancers",
+    pos = {x = 3, y = 0},
+    config = {},
+    loc_vars = function(s,iq) return {vars={}} end,
+    apply = function()
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                for i = #G.playing_cards, 1, -1 do
+                    if G.playing_cards[i]:is_face() then
+                        G.playing_cards[i]:set_ability(G.P_CENTERS.m_stone)
+                    end
+                end
+                return true
+            end
+        }))
+    end
+}
+
 
 SMODS.Challenge{
     key = 'nationallottery',

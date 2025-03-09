@@ -9,6 +9,13 @@ return {
                     "{C:red}#1#{} Joker slots",
                     "{C:red}X#2#{} base Blind size",
                 }
+            },
+            b_brit_concrete = {
+                name = "Concrete Deck",
+                text ={
+                    "All face cards are replaced",
+                    "with {C:attention,T:m_stone}Stone Cards{}."
+                }
             }
         },
         Joker={
