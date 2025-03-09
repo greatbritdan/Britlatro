@@ -198,7 +198,6 @@ pattern = "function Card:redeem()"
 position = "after"
 payload = '''
 G.GAME.current_round.vouchers_used = (G.GAME.current_round.vouchers_used or 0) + 1
-print("Voucher'd",G.GAME.current_round.vouchers_used)
 '''
 match_indent = true
 

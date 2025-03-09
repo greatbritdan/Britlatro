@@ -939,7 +939,7 @@ SMODS.Consumable(BRT_New_Consumable{set='TagCard', key='invester', pos={x=2,y=3}
 SMODS.Consumable(BRT_New_Consumable{set='TagCard', key='roller', pos={x=4,y=3}, cost=3, config={extra={tagcard=true, tag='tag_boss'}}, loc_vars=BRT_TAG_VARS})
 
 SMODS.Consumable(BRT_New_Consumable{set='Spectral', key='giver', pos={x=0,y=0}, cost=4, config={extra={tagcard=true, tag='tag_negative'}}, loc_vars=BRT_TAG_VARS,
-    hidden = true, soul_set = 'TagCard', soul_rate = 0.0012, can_repeat_soul = true
+    hidden = true, soul_set = 'TagCard', soul_rate = 0.03, can_repeat_soul = true
 })
 
 -- Enhancers --
@@ -1124,9 +1124,14 @@ SMODS.Back{
         G.E_MANAGER:add_event(Event({
             func = function()
                 local abilities = {"m_gold","m_steel","m_brit_copper"}
+                local available = {m_gold=17,m_steel=17,m_brit_copper=18,none=0}
                 for i = #G.playing_cards, 1, -1 do
-                    local ability = abilities[math.random(1, #abilities)]
+                    local ability = "none"
+                    while available[ability] <= 0 do
+                        ability = abilities[math.random(1,3)]
+                    end
                     G.playing_cards[i]:set_ability(G.P_CENTERS[ability])
+                    available[ability] = available[ability] - 1
                 end
                 return true
             end
