@@ -954,6 +954,46 @@ SMODS.Consumable(BRT_New_Consumable{set='Spectral', key='giver', pos={x=0,y=0}, 
     hidden = true, soul_set = 'TagCard', soul_rate = 0.03, can_repeat_soul = true
 })
 
+SMODS.Tag:take_ownership("tag_handy", {
+    config = {type='immediate', dollars_per_hand=1, max_dollars=20},
+    loc_vars = function (s, iq, center)
+        local dollars = center.config.dollars_per_hand*(G.GAME.hands_played or 0)
+        if dollars > center.config.max_dollars then dollars = center.config.max_dollars end
+        return {vars={center.config.dollars_per_hand,dollars,center.config.max_dollars}}
+    end,
+    apply = function(self, tag, context)
+        if context.type == 'immediate' then
+            self:yep('+', G.C.MONEY, function()
+                return true
+            end)
+            local dollars = tag.config.dollars_per_hand*(G.GAME.hands_played or 0)
+            if dollars > tag.config.max_dollars then dollars = tag.config.max_dollars end
+            ease_dollars(dollars)
+            self.triggered = true
+        end
+	end
+})
+
+SMODS.Tag:take_ownership("tag_garbage", {
+    config = {type='immediate', dollars_per_discard=1, max_dollars=20},
+    loc_vars = function (s, iq, center)
+        local dollars = center.config.dollars_per_discard*(G.GAME.unused_discards or 0)
+        if dollars > center.config.max_dollars then dollars = center.config.max_dollars end
+        return {vars={center.config.dollars_per_discard,dollars,center.config.max_dollars}}
+    end,
+    apply = function(self, tag, context)
+        if context.type == 'immediate' then
+            self:yep('+', G.C.MONEY, function()
+                return true
+            end)
+            local dollars = tag.config.dollars_per_discard*(G.GAME.unused_discards or 0)
+            if dollars > tag.config.max_dollars then dollars = tag.config.max_dollars end
+            ease_dollars(dollars)
+            self.triggered = true
+        end
+	end
+})
+
 -- Enhancers --
 
 SMODS.Seal{

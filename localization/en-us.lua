@@ -215,6 +215,24 @@ return {
                     "Gives a free",
                     "{C:tagcard}Mega Tag Pack",
                 }
+            },
+            tag_handy = {
+                name="Handy Tag",
+                text={
+                    "Gives {C:money}$#1#{} per played",
+                    "{C:blue}hand{} this run",
+                    "{C:inactive}(Will give {C:money}$#2#{C:inactive})",
+                    "{C:inactive}(Max of {C:money}$#3#{C:inactive})",
+                },
+            },
+            tag_garbage={
+                name="Garbage Tag",
+                text={
+                    "Gives {C:money}$#1#{} per unused",
+                    "{C:red}discard{} this run",
+                    "{C:inactive}(Will give {C:money}$#2#{C:inactive})",
+                    "{C:inactive}(Max of {C:money}$#3#{C:inactive})",
+                },
             }
         },
         Other={
