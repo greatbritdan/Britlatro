@@ -52,7 +52,7 @@ function BRT_Joker_Vars(s,info_queue,card)
         local mult = card.ability.extra.Xmult-(card.ability.seal_tally*card.ability.extra.Xmult_mod)
         if mult < 1 then mult = 1 end
         return {vars={mult,card.ability.extra.Xmult_mod}}
-    elseif name == 'j_brit_bruhman' then return {vars={card.ability.extra.mult,card.ability.extra.mult_mod}}
+    elseif name == 'j_brit_bruhman' then return {vars={card.ability.extra.basemult,card.ability.extra.mult}}
     elseif name == 'j_brit_unionjack' then
         local mult = card.ability.extra.Xmult + (card.ability.extra.Xmult_mod*card.ability.jack_tally)
         return {vars={card.ability.extra.Xmult_mod,mult}}

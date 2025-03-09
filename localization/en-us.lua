@@ -4,8 +4,8 @@ return {
             b_brit_shiny = {
                 name = "Shiny Deck",
                 text ={
-                    "Start with a Deck",
-                    "full of {C:attention}Shiny Enhanced{} cards",
+                    "Start with a Deck full of",
+                    "{C:attention,T:m_gold}Gold{}, {C:attention,T:m_steel}Steel{} and {C:attention,T:m_brit_copper}Copper{} cards",
                     "{C:red}#1#{} Joker slots",
                     "{C:red}X#2#{} base Blind size",
                 }
@@ -46,7 +46,8 @@ return {
                 name = "Bruh...",
                 text = {
                     '{C:mult}+#1#{} Mult if you have',
-                    'no negative jokers'
+                    'no negative jokers',
+                    '{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)'
                 },
             },
             j_brit_unionjack = {
@@ -76,7 +77,7 @@ return {
                 text = {
                     "Gives {C:chips}+#1#{} Chips",
                     "Gives {C:mult}+#2#{} Mult",
-                    "Changes each round",
+                    "{C:attention}Changes each round",
                 }
             },
             j_brit_red_joker = {
