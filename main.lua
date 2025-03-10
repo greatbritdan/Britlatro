@@ -832,6 +832,7 @@ SMODS.Booster{
     kind = 'Tag',
     atlas = 'Boosters',
     pos = {x=0,y=0},
+    weight = 0.75,
     config = { extra = 2, choose = 1 },
     create_card = function(self, card, i)
         return BRT_TagBooster(i)
@@ -856,6 +857,7 @@ SMODS.Booster{
     kind = 'Tag',
     atlas = 'Boosters',
     pos = {x=1,y=0},
+    weight = 0.75,
     config = { extra = 2, choose = 1 },
     create_card = function(self, card, i)
         return BRT_TagBooster(i)
@@ -880,6 +882,7 @@ SMODS.Booster{
     kind = 'Tag',
     atlas = 'Boosters',
     pos = {x=2,y=0},
+    weight = 0.75,
     cost = 6,
     config = { extra = 4, choose = 1 },
     create_card = function(self, card, i)
@@ -905,6 +908,7 @@ SMODS.Booster{
     kind = 'Tag',
     atlas = 'Boosters',
     pos = {x=3,y=0},
+    weight = 0.75,
     cost = 8,
     config = { extra = 4, choose = 2 },
     create_card = function(self, card, i)
@@ -1042,7 +1046,7 @@ SMODS.Voucher{
     redeem = function(s)
 		G.E_MANAGER:add_event(Event({
 			func = function()
-				G.GAME.tagcard_rate = (G.GAME.tagcard_rate or 0) + 4
+				G.GAME.tagcard_rate = (G.GAME.tagcard_rate or 0) + 2
 				return true
 			end,
 		}))
@@ -1060,7 +1064,7 @@ SMODS.Voucher{
     redeem = function(s)
 		G.E_MANAGER:add_event(Event({
 			func = function()
-				G.GAME.tagcard_rate = (G.GAME.tagcard_rate or 4) + 4
+				G.GAME.tagcard_rate = (G.GAME.tagcard_rate or 2) + 2
 				return true
 			end,
 		}))
@@ -1334,14 +1338,14 @@ SMODS.DeckSkin{
 
 --
 
-local crr = G.FUNCS.can_reroll
 function G.FUNCS.can_reroll(e)
-	if G.GAME.modifiers.no_shop_purchases then
-		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+    if G.GAME.modifiers.no_shop_purchases or (((G.GAME.dollars-G.GAME.bankrupt_at) - G.GAME.current_round.reroll_cost < 0) and G.GAME.current_round.reroll_cost ~= 0) then
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
         e.config.button = nil
-        return
+    else
+        e.config.colour = G.C.GREEN
+        e.config.button = 'reroll_shop'
     end
-	return crr(e)
 end
 
 function G.FUNCS.exit_button()
