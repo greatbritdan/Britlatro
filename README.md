@@ -14,12 +14,13 @@ Or view the guide from the Steamodded Github: https://github.com/Steamodded/smod
 - 17 Tag Cards
 - 2 New Tarots, 2 New Spectrals
 - 1 New Planet & Hand type - Clean slate (5 stone cards)
-- 3 New Tags
+- 3 New Tags + 2 Modified Tags
 - 4 New Vouchers
 - 1 New Seal
 - 1 New Enhancement
-- 1 New Deck
-- 2 New Challenges
+- 2 New Decks
+- 3 New Challenges
+- 3 New Blinds
 
 ## Download!
 https://github.com/greatbritdan/Britlatro/releases/tag/Release
