@@ -956,7 +956,7 @@ SMODS.Consumable(BRT_New_Consumable{set='TagCard', key='invester', pos={x=2,y=3}
 SMODS.Consumable(BRT_New_Consumable{set='TagCard', key='roller', pos={x=4,y=3}, cost=3, config={extra={tagcard=true, tag='tag_boss'}}, loc_vars=BRT_TAG_VARS})
 
 SMODS.Consumable(BRT_New_Consumable{set='Spectral', key='giver', pos={x=0,y=0}, cost=4, config={extra={tagcard=true, tag='tag_negative'}}, loc_vars=BRT_TAG_VARS,
-    hidden = true, soul_set = 'TagCard', soul_rate = 0.03, can_repeat_soul = true
+    hidden = true, soul_set = 'TagCard', soul_rate = 0.01, can_repeat_soul = true
 })
 
 SMODS.Tag:take_ownership("tag_handy", {
