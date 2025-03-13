@@ -13,9 +13,32 @@ return {
             b_brit_concrete = {
                 name = "Concrete Deck",
                 text ={
-                    "All face cards are replaced",
-                    "with {C:attention,T:m_stone}Stone Cards{}."
+                    "Start with a {C:attention,T:j_brit_concrete}Concrete Joker{}",
+                    "and 2 copies of {C:attention,T:c_tower}The Tower{}",
                 }
+            }
+        },
+        Blind={
+            bl_brit_remainder = {
+                name = "The Remainder",
+                text = {
+                    "All cards with odd",
+                    "rank are debuffed",
+                },
+            },
+            bl_brit_absolute = {
+                name = "The Absolute",
+                text = {
+                    "All cards with even",
+                    "rank are debuffed",
+                },
+            },
+            bl_brit_boulder = {
+                name = "The Boulder",
+                text = {
+                    "All stone cards",
+                    "are debuffed",
+                },
             }
         },
         Joker={

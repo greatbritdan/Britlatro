@@ -10,6 +10,7 @@ SMODS.Atlas{key = 'Spectrals', path = 'Spectrals.png', px = 71, py = 95}
 SMODS.Atlas{key = 'Tags', path = 'Tags.png', px = 34, py = 34}
 SMODS.Atlas{key = "modicon", path = "modicon.png", px = 32, py = 32}
 SMODS.Atlas{key = "Enhancers", path = "Enhancers.png", px = 71, py = 95}
+SMODS.Atlas{key = "BlindChips", atlas_table = "ANIMATION_ATLAS", path = "BlindChips.png", px = 34, py = 34, frames = 21}
 
 function BRT_Give_Tag(tag)
     add_tag(Tag(tag))
@@ -967,13 +968,13 @@ SMODS.Tag:take_ownership("tag_handy", {
     end,
     apply = function(self, tag, context)
         if context.type == 'immediate' then
-            self:yep('+', G.C.MONEY, function()
+            tag:yep('+', G.C.MONEY, function()
                 return true
             end)
             local dollars = tag.config.dollars_per_hand*(G.GAME.hands_played or 0)
             if dollars > tag.config.max_dollars then dollars = tag.config.max_dollars end
             ease_dollars(dollars)
-            self.triggered = true
+            tag.triggered = true
         end
 	end
 })
@@ -987,13 +988,13 @@ SMODS.Tag:take_ownership("tag_garbage", {
     end,
     apply = function(self, tag, context)
         if context.type == 'immediate' then
-            self:yep('+', G.C.MONEY, function()
+            tag:yep('+', G.C.MONEY, function()
                 return true
             end)
             local dollars = tag.config.dollars_per_discard*(G.GAME.unused_discards or 0)
             if dollars > tag.config.max_dollars then dollars = tag.config.max_dollars end
             ease_dollars(dollars)
-            self.triggered = true
+            tag.triggered = true
         end
 	end
 })
@@ -1169,6 +1170,60 @@ SMODS.Tag{
 
 --
 
+SMODS.Blind{
+    key = "remainder",
+    atlas = 'BlindChips',
+    pos = {x=0,y=0},
+    boss = {min=1,max=10},
+    boss_colour = G.C.RED,
+	recalc_debuff = function(self, card, fb)
+		if card.area ~= G.jokers and not G.GAME.blind.disabled then
+			if card.base.value == "3" or card.base.value == "5" or card.base.value == "7" or card.base.value == "9" or card.base.value == "Ace" then
+                if card.ability.effect ~= "Stone Card" then
+				    return true
+                end
+			end
+			return false
+		end
+	end
+}
+
+SMODS.Blind{
+    key = "absolute",
+    atlas = 'BlindChips',
+    pos = {x=0,y=1},
+    boss = {min=1,max=10},
+    boss_colour = G.C.BLUE,
+	recalc_debuff = function(self, card, fb)
+		if card.area ~= G.jokers and not G.GAME.blind.disabled then
+			if card.base.value == "2" or card.base.value == "4" or card.base.value == "6" or card.base.value == "8" or card.base.value == "10" then
+                if card.ability.effect ~= "Stone Card" then
+				    return true
+                end
+			end
+			return false
+		end
+	end
+}
+
+SMODS.Blind{
+    key = "boulder",
+    atlas = 'BlindChips',
+    pos = {x=0,y=2},
+    boss = {min=2,max=10},
+    boss_colour = G.C.GREY,
+	recalc_debuff = function(self, card, fb)
+		if card.area ~= G.jokers and not G.GAME.blind.disabled then
+			if card.ability.effect == "Stone Card" then
+				return true
+			end
+			return false
+		end
+	end
+}
+
+--
+
 SMODS.Back{
     name = "Shiny Deck",
     key = "shiny",
@@ -1200,20 +1255,9 @@ SMODS.Back{
     key = "concrete",
     atlas = "Enhancers",
     pos = {x = 3, y = 0},
-    config = {},
+    config = { consumables = {"c_tower","c_tower"}, jokers = {"j_brit_concrete"} },
     loc_vars = function(s,iq) return {vars={}} end,
-    apply = function()
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                for i = #G.playing_cards, 1, -1 do
-                    if G.playing_cards[i]:is_face() then
-                        G.playing_cards[i]:set_ability(G.P_CENTERS.m_stone)
-                    end
-                end
-                return true
-            end
-        }))
-    end
+    apply = function(s, back) end
 }
 
 
