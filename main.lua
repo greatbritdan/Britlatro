@@ -1383,7 +1383,7 @@ SMODS.DeckSkin{
 --
 
 function G.FUNCS.can_reroll(e)
-    if G.GAME.modifiers.no_shop_purchases or (((G.GAME.dollars-G.GAME.bankrupt_at) - G.GAME.current_round.reroll_cost < 0) and G.GAME.current_round.reroll_cost ~= 0) then
+    if G.GAME.modifiers.no_shop_purchases or (((G.GAME.dollars-G.GAME.bankrupt_at) - G.GAME.current_round.reroll_cost) < 0 and G.GAME.current_round.reroll_cost ~= 0) then
         e.config.colour = G.C.UI.BACKGROUND_INACTIVE
         e.config.button = nil
     else
